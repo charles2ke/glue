@@ -1,0 +1,10 @@
+{
+  "name": "glue",
+  "version": "1.0.0",
+  "description": "A little home for your stamp collection",
+  "private": true,
+  "scripts": {
+    "start": "python3 -m http.server 8000"
+  },
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f6f1">
+  <title>Postmark — Your little corner of the world</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Postmark home"><span class="brand-icon">✳</span><span>postmark<span class="brand-dot">.</span></span></a>
+      <div class="sidebar-label">YOUR SPACE</div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link active" href="#collection"><span>▦</span> My collection</a>
+        <button class="nav-link" id="sidebar-share"><span>↗</span> Share collection</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-postcard"><span>✳</span><p>A little piece of<br>everywhere.</p><small>COLLECT THE WORLD</small></div>
+        <div class="profile"><div class="avatar">Y</div><div><strong>Your collection</strong><small>Stored on this device</small></div></div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div class="breadcrumb">Your space <span>/</span> <strong>My collection</strong></div>
+        <div class="top-actions"><button class="button button-outline" id="share-button"><span>↗</span> Share collection</button><button class="button button-dark" id="add-button"><span>＋</span> Add a stamp</button></div>
+      </header>
+
+      <div class="content">
+        <section class="intro">
+          <div><div class="eyebrow"><span>✳</span> A COLLECTION WITH CHARACTER</div><h1>A little piece of<br><em>everywhere.</em></h1><p>Every stamp has a story. Keep your favorite finds,<br class="desktop-break"> faraway places, and little treasures together here.</p><button class="button button-coral" id="intro-add">＋ &nbsp; Add to your collection</button></div>
+          <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="postmark-circle">AIR MAIL<br>✳<br>PAR AVION</div><div class="hero-stamp hero-stamp-back"><div>POSTES<br><span>✿</span><small>REPUBLIQUE FRANÇAISE</small></div></div><div class="hero-stamp hero-stamp-front"><div><small>JAPAN · NIPPON</small><span>☀</span><b>富士山</b><small>80 NIPPON</small></div></div><div class="hero-sparkle">✳</div><div class="hero-note">little treasures,<br>big stories <span>↗</span></div></div>
+        </section>
+
+        <section class="stats" aria-label="Collection statistics">
+          <div class="stat"><span class="stat-icon peach">✉</span><div><strong id="stamp-count">0</strong><small>STAMPS COLLECTED</small></div></div>
+          <div class="stat"><span class="stat-icon sage">◎</span><div><strong id="country-count">0</strong><small>COUNTRIES EXPLORED</small></div></div>
+          <div class="stat"><span class="stat-icon lilac">◇</span><div><strong id="total-value">$0.00</strong><small>COLLECTION VALUE</small></div></div>
+          <div class="stat-quote">“The world is a book, and those who<br> do not travel read only one page.” <span>✳</span></div>
+        </section>
+
+        <section class="collection" id="collection">
+          <div class="section-heading"><div><div class="eyebrow muted">THE GOOD STUFF</div><h2>My collection <span>✳</span></h2><p>Your little pieces of the world, all in one place. Example stamps can be removed.</p></div><button class="text-button" id="import-button">↓ &nbsp; Import collection</button><input id="import-file" type="file" accept=".json,application/json" hidden></div>
+          <div class="toolbar"><label class="search"><span>⌕</span><span class="sr-only">Search stamps</span><input id="search" type="search" placeholder="Search your stamps..."></label><div class="toolbar-right"><label for="group-by">Group by</label><select id="group-by"><option value="none">All stamps</option><option value="country">Country</option><option value="price">Price</option></select></div></div>
+          <div class="collection-caption"><span id="results-label">ALL STAMPS</span><span>YOUR PERSONAL COLLECTION &nbsp; ✳</span></div>
+          <div id="stamp-list"></div>
+          <div id="empty-state" class="empty" hidden><span>✉</span><h3>No stamps here yet</h3><p>Add a stamp or try a different search.</p><button class="button button-dark" id="empty-add">＋ &nbsp; Add a stamp</button></div>
+        </section>
+        <footer><span>POSTMARK <b>✳</b></span><span>Made for the stories we collect along the way.</span><span>HAPPY COLLECTING ♡</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="stamp-dialog">
+    <form id="stamp-form">
+      <div class="dialog-heading"><div><div class="eyebrow muted">A NEW LITTLE TREASURE</div><h2>Add a stamp</h2><p>Give your stamp a place in your collection.</p></div><button type="button" class="close" data-close="stamp-dialog" aria-label="Close">×</button></div>
+      <label class="photo-field" for="photo"><span>＋</span><strong id="photo-label">Upload or take a photo</strong><small>JPG, PNG or WebP · up to 10 MB</small></label><input id="photo" type="file" accept="image/jpeg,image/png,image/webp" required>
+      <div class="form-grid"><label>Stamp name<input id="name" maxlength="80" required placeholder="e.g. Cherry blossom"></label><label>Country<input id="country" maxlength="80" required placeholder="e.g. Japan"></label><label>Estimated value (USD)<input id="price" type="number" min="0" max="1000000" step="0.01" required placeholder="0.00"></label><label>Year <span class="optional">(optional)</span><input id="year" type="number" min="1840" max="2100" placeholder="e.g. 1964"></label></div>
+      <p class="form-error" id="stamp-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button button-outline" data-close="stamp-dialog">Cancel</button><button class="button button-dark" type="submit">Add stamp</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="share-dialog"><div class="dialog-heading"><div><div class="eyebrow muted">SPREAD THE JOY</div><h2>Share your collection</h2><p>Send your collection as a file for someone else to import into Postmark.</p></div><button class="close" data-close="share-dialog" aria-label="Close">×</button></div><div class="share-note">✉ <span>Your export includes stamp photos and details. Share it only with people you trust.</span></div><div class="dialog-actions"><button class="button button-outline" data-close="share-dialog">Close</button><button class="button button-dark" id="export-button">↓ &nbsp; Download collection</button></div></dialog>
+
+  <dialog id="order-dialog"><form id="order-form"><div class="dialog-heading"><div><div class="eyebrow muted">A LITTLE SOMETHING FOR YOUR MAILBOX</div><h2>Request a physical stamp</h2><p>Prepare an email to a seller about <strong id="order-stamp"></strong>. No payment or order is processed by Postmark.</p></div><button type="button" class="close" data-close="order-dialog" aria-label="Close">×</button></div><label>Seller’s email<input id="seller-email" type="email" required placeholder="seller@example.com"></label><label>Delivery details<textarea id="delivery" required maxlength="500" rows="3" placeholder="Your name and mailing address"></textarea></label><p class="fine-print">Only include details you’re comfortable sending to this seller. Confirm availability, price, and shipping with them directly.</p><div class="dialog-actions"><button type="button" class="button button-outline" data-close="order-dialog">Cancel</button><button class="button button-dark" type="submit">Open email draft ↗</button></div></form></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
