@@ -41,8 +41,9 @@ function validStamp(item) {
     typeof item.country === 'string' && item.country.trim().length > 0 && item.country.length <= 80 &&
     typeof item.price === 'number' && Number.isFinite(item.price) && item.price >= 0 && item.price <= 1000000 &&
     typeof item.year === 'string' && (item.year === '' || /^(18[4-9]\d|19\d\d|20\d\d|2100)$/.test(item.year)) &&
-    ((typeof item.sample === 'string' && Object.hasOwn(sampleDesigns, item.sample)) ||
-      (typeof item.image === 'string' && item.image.length <= 2000000 && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(item.image)));
+    (item.sample
+      ? typeof item.sample === 'string' && Object.hasOwn(sampleDesigns, item.sample)
+      : typeof item.image === 'string' && item.image.length <= 2000000 && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(item.image));
 }
 
 function loadCollection() {
