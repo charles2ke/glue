@@ -191,8 +191,12 @@ $('photo').addEventListener('change', () => $('photo-label').textContent = $('ph
 
 $('stamp-form').addEventListener('submit', async event => {
   event.preventDefault();
-  const button = event.submitter;
-  button.disabled = true;
+  const dialog = $('stamp-dialog');
+  const controls = [...$('stamp-form').querySelectorAll('button, input')];
+  const previouslyDisabled = controls.map(control => control.disabled);
+  const preventCancel = event => event.preventDefault();
+  controls.forEach(control => control.disabled = true);
+  dialog.addEventListener('cancel', preventCancel);
   $('stamp-error').textContent = '';
   try {
     const image = await readImage($('photo').files[0]);
@@ -206,13 +210,14 @@ $('stamp-form').addEventListener('submit', async event => {
     };
     if (!validStamp(stamp)) throw new Error('Please check your stamp details and try again.');
     if (saveCollection([stamp, ...stamps])) {
-      $('stamp-dialog').close();
+      dialog.close();
       notify('Your stamp has been added.');
     }
   } catch (error) {
     $('stamp-error').textContent = error.message || 'Could not add this stamp.';
   } finally {
-    button.disabled = false;
+    dialog.removeEventListener('cancel', preventCancel);
+    controls.forEach((control, index) => control.disabled = previouslyDisabled[index]);
   }
 });
 
