@@ -57,7 +57,7 @@
   <dialog id="stamp-dialog">
     <form id="stamp-form">
       <div class="dialog-heading"><div><div class="eyebrow muted">A NEW LITTLE TREASURE</div><h2>Add a stamp</h2><p>Give your stamp a place in your collection.</p></div><button type="button" class="close" data-close="stamp-dialog" aria-label="Close">×</button></div>
-      <label class="photo-field" for="photo"><span>＋</span><strong id="photo-label">Upload or take a photo</strong><small>JPG, PNG or WebP · up to 10 MB</small></label><input id="photo" type="file" accept="image/jpeg,image/png,image/webp" required>
+      <input id="photo" type="file" accept="image/jpeg,image/png,image/webp" required><label class="photo-field" for="photo"><span>＋</span><strong id="photo-label">Upload or take a photo</strong><small>JPG, PNG or WebP · up to 10 MB</small></label>
       <div class="form-grid"><label>Stamp name<input id="name" maxlength="80" required placeholder="e.g. Cherry blossom"></label><label>Country<input id="country" maxlength="80" required placeholder="e.g. Japan"></label><label>Estimated value (USD)<input id="price" type="number" min="0" max="1000000" step="0.01" required placeholder="0.00"></label><label>Year <span class="optional">(optional)</span><input id="year" type="number" min="1840" max="2100" placeholder="e.g. 1964"></label></div>
       <p class="form-error" id="stamp-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button button-outline" data-close="stamp-dialog">Cancel</button><button class="button button-dark" type="submit">Add stamp</button></div>
     </form>
